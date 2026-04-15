@@ -21,14 +21,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 2. Build và Push Image cho Dashboard (Next.js)
+      # 2. Build và Push Image -ho Dashboard (Next.js)
       - name: Build and Push Dashboard
         uses: docker/build-push-action@v4
         with:
-          # Context: PHẢI LÀ THƯ MỤC (Chứa code Next.js)
+          # Context trỏ thẳng vào thư mục chứa Dockerfile
           context: ./visualize_big_data/nextJS/my-dashboard
-          # File: ĐƯỜNG DẪN ĐẾN FILE (Chỉ đích danh cái Dockerfile)
-          file: ./visualize_big_data/nextJS/my-dashboard/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nextjs-dashboard:latest
 
