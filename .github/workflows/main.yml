@@ -23,7 +23,7 @@ jobs:
       - name: Build and Push Dashboard
         uses: docker/build-push-action@v4
         with:
-          context: ./visualize_big_data/nextJS/my-dashboard # Đường dẫn đến code frontend
+          context: ./visualize_big_data/nextJS/my-dashboard/Dockerfile # Đường dẫn đến code frontend
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nextjs-dashboard:latest
 
