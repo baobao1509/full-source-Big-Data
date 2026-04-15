@@ -35,8 +35,8 @@ jobs:
       - name: Build and Push Spark
         uses: docker/build-push-action@v4
         with:
-          context: ./visualize_big_data/Big-Data
-          file: ./visualize_big_data/Big-Data/Dockerfile
+          context: ./
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/spark-app:latest
 
