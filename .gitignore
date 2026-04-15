@@ -1,0 +1,12 @@
+# Chặn tất cả file dữ liệu nặng
+*.csv
+*.parquet
+checkpoint/
+output/
+ml_temp/
+
+# Chặn thư viện rác
+node_modules/
+.next/
+__pycache__/
+.DS_Store

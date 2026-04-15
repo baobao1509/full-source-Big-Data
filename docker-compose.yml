@@ -1,0 +1,60 @@
+services:
+  # 1. CONTAINER CHẠY SPARK
+  spark-app:
+    image: jupyter/pyspark-notebook:spark-3.5.0
+    container_name: spark_local_container
+    networks:
+      - data-network
+    volumes:
+      - .:/home/jovyan/work
+      - D:/Big_Data:/data
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - PYSPARK_PYTHON=python3
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    user: root
+    command: >
+      sh -c "pip install pyspark==3.5.0 delta-spark==3.0.0 && start-notebook.sh --NotebookApp.token=''"
+
+  # 2. CONTAINER CHẠY MONGODB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    networks:
+      - data-network
+
+  # 3. GIAO DIỆN QUẢN LÝ MONGO (XEM QUA TRÌNH DUYỆT)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    networks:
+      - data-network
+    depends_on:
+      - mongodb
+  # 4. THÊM CON DASHBOARD NEXT.JS VÀO ĐÂY
+  dashboard:
+      build: 
+        context: ./visualize_big_data/nextJS/my-dashboard 
+      container_name: nextjs_dashboard
+      ports:
+        - "9091:3000"
+      networks:
+        - data-network
+      environment:
+        - MONGODB_URI=mongodb://mongodb:27017
+      depends_on:
+        - mongodb
+      restart: always
+
+# --- ĐÂY LÀ PHẦN MÀY ĐANG THIẾU NÈ ---
+networks:
+  data-network:
+    driver: bridge
