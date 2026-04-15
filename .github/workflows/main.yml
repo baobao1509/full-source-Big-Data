@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Show all files (Debug)
+        run: find . -maxdepth 5
 
     # 1. Đăng nhập vào Docker Hub (SỬA LẠI NHƯ NÀY)
       - name: Login to Docker Hub
