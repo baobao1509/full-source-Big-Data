@@ -3,18 +3,18 @@ from pyspark.sql.functions import col, when, floor
 
 # 1. KHỞI TẠO SPARK VỚI MONGODB CONNECTOR
 # Thêm package mongo-spark-connector để Spark biết ghi vào Mongo
+mongo_cloud_uri ="mongodb+srv://giabaodongthanh:15092004@cluster0.j2vxi.mongodb.net/?appName=Cluster0"
 spark = SparkSession.builder \
     .appName("Analyze_To_MongoDB") \
     .config("spark.jars.packages", "org.mongodb.spark:mongo-spark-connector_2.12:10.3.0,io.delta:delta-spark_2.12:3.0.0") \
     .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
     .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
-    .config("spark.mongodb.write.connection.uri", "mongodb://mongodb:27017") \
+    .config("spark.mongodb.write.connection.uri", mongo_cloud_uri) \
     .getOrCreate()
 
 # Đường dẫn dữ liệu trong Docker
 BASE_PATH = "/home/jovyan/work/output"
 DB_NAME = "analyze"
-
 # Hàm hỗ trợ ghi vào MongoDB cho gọn code
 def save_to_mongo(df, collection_name):
     df.write.format("mongodb") \

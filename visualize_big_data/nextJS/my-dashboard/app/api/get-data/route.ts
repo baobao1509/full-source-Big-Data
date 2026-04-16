@@ -3,7 +3,8 @@ import { MongoClient } from 'mongodb';
 
 export async function GET() {
   // Kết nối vào MongoDB trong Docker
-  const uri = "mongodb://mongodb:27017"; 
+  //const uri = "mongodb://mongodb:27017"; 
+  const uri = process.env.MONGODB_URI || "no"; // Fallback nếu biến môi trường không được thiết lập
   const client = new MongoClient(uri);
 
   try {
