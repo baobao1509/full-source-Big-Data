@@ -31,7 +31,7 @@ jobs:
         run: |
           # Dòng này giúp Python hiểu thư mục gốc là nơi chứa code
           export PYTHONPATH=$PYTHONPATH:$(pwd)
-          pytest tests/test_spark.py
+          pytest tests/test_analyze.py
 
   # --- JOB 2: BUILD VÀ PUSH (Chỉ chạy khi Test Xanh) ---
   build-and-push:
