@@ -13,7 +13,7 @@ services:
       - PYSPARK_PYTHON=python3
     ports:
       - "8888:8888"
-      - "4040:4040"
+      - "1509:4040"
     user: root
     command: >
       sh -c "pip install pyspark==3.5.0 delta-spark==3.0.0 && start-notebook.sh --NotebookApp.token=''"
