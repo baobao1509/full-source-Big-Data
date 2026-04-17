@@ -1,6 +1,6 @@
 import pytest
 from pyspark.sql import SparkSession
-from analyze_logic import calculate_balance_dist
+from Big_Data.analyze_logic import calculate_balance_dist
 
 @pytest.fixture(scope="session")
 def spark():
