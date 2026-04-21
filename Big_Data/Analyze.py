@@ -50,4 +50,5 @@ save_dual(calculate_edu_stats(df_mkt_silver), "viz_mkt_edu")
 save_dual(df_loan_res.select("dti", "loan_amnt", "prediction").limit(1000), "viz_loan_scatter")
 save_dual(df_mkt_res.groupBy("job", "prediction").count(), "viz_mkt_job")
 
+print("\n🏁 Đã final")
 print("\n🏁 HOÀN TẤT! Dữ liệu đã đồng bộ Local Docker và Cloud Atlas.")
